@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>E-Learning Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body id="body" class="transition duration-500 ease-in-out">
+
+  <!-- 🔄 Loader -->
+  <div id="loader" class="fixed inset-0 bg-white z-50 flex justify-center items-center">
+    <div class="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+  </div>
+
+  <!-- 🌐 Navbar -->
+  <nav class="bg-white shadow-md p-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold text-blue-600">E-Learn</h1>
+    <div class="space-x-6 text-gray-700 flex items-center gap-4">
+      <a href="index.html" class="hover:text-blue-600">Home</a>
+      <a href="courses.html" class="hover:text-blue-600">Courses</a>
+      <a href="dashboard.html" class="hover:text-blue-600">Dashboard</a>
+      <button id="toggleTheme" class="bg-gray-200 text-sm px-3 py-1 rounded hover:bg-gray-300">
+        🌙 Dark Mode
+      </button>
+    </div>
+  </nav>
+
+  <!-- 🟦 Hero Section -->
+  <section class="bg-blue-100 py-20 text-center">
+    <h2 class="text-4xl font-bold mb-4">Learn Anytime, Anywhere</h2>
+    <p class="text-lg">Join thousands of learners and enhance your skills</p>
+  </section>
+
+  <!-- 🎓 Featured Courses (Click Enabled) -->
+  <section class="p-8">
+    <h3 class="text-2xl font-semibold mb-6">Featured Courses</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+
+      <!-- Course 1 -->
+      <a href="course-detail.html?course=html">
+        <div class="bg-white rounded shadow p-4 hover:shadow-lg transition">
+          <img src="images/html.jpg" class="rounded mb-3" />
+          <h4 class="font-bold">HTML Mastery</h4>
+          <p class="text-sm text-gray-600">Learn basic to advanced HTML.</p>
+        </div>
+      </a>
+
+      <!-- Course 2 -->
+      <a href="course-detail.html?course=css">
+        <div class="bg-white rounded shadow p-4 hover:shadow-lg transition">
+          <img src="images/css.jpg" class="rounded mb-3" />
+          <h4 class="font-bold">CSS for Beginners</h4>
+          <p class="text-sm text-gray-600">Responsive design with Flexbox and Grid.</p>
+        </div>
+      </a>
+
+      <!-- Course 3 -->
+      <a href="course-detail.html?course=js">
+        <div class="bg-white rounded shadow p-4 hover:shadow-lg transition">
+          <img src="images/js.jpg" class="rounded mb-3" />
+          <h4 class="font-bold">JavaScript Essentials</h4>
+          <p class="text-sm text-gray-600">Learn JS from scratch to DOM & APIs.</p>
+        </div>
+      </a>
+
+      <!-- Course 4 -->
+      <a href="course-detail.html?course=react">
+        <div class="bg-white rounded shadow p-4 hover:shadow-lg transition">
+          <img src="images/react.jpg" class="rounded mb-3" />
+          <h4 class="font-bold">React from Scratch</h4>
+          <p class="text-sm text-gray-600">Component-based frontend with React.js</p>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- 📜 Script -->
+  <script src="script.js"></script>
+</body>
+</html>

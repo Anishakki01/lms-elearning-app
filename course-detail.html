@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Course Detail</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/aspect-ratio"></script>
+  <script>
+    tailwind.config = {
+      plugins: [tailwindcssAspectRatio]
+    };
+  </script>
+</head>
+<body id="body" class="min-h-screen flex flex-col transition duration-500 ease-in-out bg-gray-100 text-gray-800">
+
+  <!-- 🔄 Loader -->
+  <div id="loader" class="fixed inset-0 bg-white z-50 flex justify-center items-center">
+    <div class="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+  </div>
+
+  <!-- 🌐 Navbar -->
+  <nav class="bg-white shadow-md p-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold text-blue-600">E-Learn</h1>
+    <div class="space-x-6 text-gray-700 flex items-center gap-4">
+      <a href="index.html" class="hover:text-blue-600">Home</a>
+      <a href="courses.html" class="hover:text-blue-600">Courses</a>
+      <a href="dashboard.html" class="hover:text-blue-600">Dashboard</a>
+      <button id="toggleTheme" class="bg-gray-200 px-3 py-1 rounded">🌙 Dark Mode</button>
+    </div>
+  </nav>
+
+  <!-- 📘 Course Section -->
+  <main class="flex-grow">
+    <section class="p-8 max-w-7xl mx-auto">
+      <h2 id="courseTitle" class="text-3xl font-bold mb-10 text-center">Loading...</h2>
+      <div class="space-y-10" id="chapters"></div>
+
+      <div class="mt-12 text-center">
+        <a id="quizLink" href="#">
+          <button class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded">
+            Start Quiz
+          </button>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ✅ Optional Footer -->
+  <footer class="bg-white shadow text-center text-sm py-4 text-gray-500">
+    © 2025 E-Learn | Made by Anish 🚀
+  </footer>
+
+  <!-- ✅ Script -->
+  <script>
+    window.addEventListener("load", () => {
+      const loader = document.getElementById("loader");
+      if (loader) loader.style.display = "none";
+
+      const savedTheme = localStorage.getItem("theme") || "light";
+      applyTheme(savedTheme);
+
+      const toggleBtn = document.getElementById("toggleTheme");
+      if (toggleBtn) {
+        toggleBtn.addEventListener("click", () => {
+          const currentTheme = localStorage.getItem("theme") || "light";
+          applyTheme(currentTheme === "light" ? "dark" : "light");
+        });
+      }
+    });
+
+    function applyTheme(theme) {
+      const body = document.getElementById("body");
+      if (theme === "dark") {
+        body.classList.add("bg-gray-900", "text-white");
+        body.classList.remove("bg-gray-100", "text-gray-800");
+        localStorage.setItem("theme", "dark");
+        document.getElementById("toggleTheme").innerText = "☀️ Light Mode";
+      } else {
+        body.classList.remove("bg-gray-900", "text-white");
+        body.classList.add("bg-gray-100", "text-gray-800");
+        localStorage.setItem("theme", "light");
+        document.getElementById("toggleTheme").innerText = "🌙 Dark Mode";
+      }
+    }
+
+    const allCourses = {
+      html: {
+        title: "HTML Mastery",
+        thumbnail: "images/html.jpg",
+        quizLink: "quiz.html?course=html",
+        chapters: [
+          { id: "html-1", title: "Intro to HTML", video: "UB1O30fR-EE" },
+          { id: "html-2", title: "Forms & Inputs", video: "n4R2E7O-Ngo" },
+          { id: "html-3", title: "Semantic Layouts", video: "qz0aGYrrlhU" }
+        ]
+      },
+      css: {
+        title: "CSS Mastery",
+        thumbnail: "images/css.jpg",
+        quizLink: "quiz.html?course=css",
+        chapters: [
+          { id: "css-1", title: "Intro to CSS", video: "yfoY53QXEnI" },
+          { id: "css-2", title: "Flexbox & Grid", video: "JJSoEo8JSnc" },
+          { id: "css-3", title: "Responsive Design", video: "srvUrASNj0s" }
+        ]
+      },
+      js: {
+        title: "JavaScript Hero",
+        thumbnail: "images/js.jpg",
+        quizLink: "quiz.html?course=js",
+        chapters: [
+          { id: "js-1", title: "JS Basics", video: "upDLs1sn7g4" },
+          { id: "js-2", title: "DOM Manipulation", video: "0ik6X4DJKCc" },
+          { id: "js-3", title: "Events & Functions", video: "cXUWYZXru6o" }
+        ]
+      },
+      react: {
+        title: "React Wizard",
+        thumbnail: "images/react.jpg",
+        quizLink: "quiz.html?course=react",
+        chapters: [
+          { id: "react-1", title: "JSX & Components", video: "bMknfKXIFA8" },
+          { id: "react-2", title: "Props & State", video: "O6P86uwfdR0" },
+          { id: "react-3", title: "Hooks & Routing", video: "oUZjO00NkhY" }
+        ]
+      }
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const courseKey = params.get("course");
+    if (!courseKey || !allCourses[courseKey]) {
+      window.location.href = "courses.html";
+    }
+
+    const course = allCourses[courseKey];
+    const container = document.getElementById("chapters");
+    const progress = JSON.parse(localStorage.getItem("progress")) || {};
+
+    document.getElementById("courseTitle").innerText = course.title;
+    document.getElementById("quizLink").href = course.quizLink;
+
+    course.chapters.forEach(ch => {
+      const done = progress[ch.id];
+      container.innerHTML += `
+        <div class="bg-white shadow-md rounded-lg p-6 space-y-4 w-full">
+          <div class="flex items-center gap-4">
+            <img src="${course.thumbnail}" alt="Course Icon" class="w-12 h-12 object-contain rounded-full">
+            <h3 class="text-xl font-bold">${ch.title}</h3>
+          </div>
+
+          <div class="aspect-w-16 aspect-h-9">
+            <iframe class="w-full h-full rounded-md" 
+              src="https://www.youtube.com/embed/${ch.video}" 
+              frameborder="0" allowfullscreen>
+            </iframe>
+          </div>
+
+          <div>
+            ${
+              done
+                ? `<span class="text-green-600 font-medium">✔️ Completed</span>`
+                : `<button onclick="markComplete('${ch.id}')" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Mark as Completed</button>`
+            }
+          </div>
+        </div>
+      `;
+    });
+
+    function markComplete(id) {
+      progress[id] = true;
+      localStorage.setItem("progress", JSON.stringify(progress));
+      location.reload();
+    }
+  </script>
+</body>
+</html>

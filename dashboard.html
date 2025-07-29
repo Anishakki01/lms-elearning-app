@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body id="body" class="transition duration-500 ease-in-out">
+
+  <!-- 🔄 Loader -->
+  <div id="loader" class="fixed inset-0 bg-white z-50 flex justify-center items-center">
+    <div class="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+  </div>
+
+  <!-- 🌐 Navbar -->
+   <button id="toggleTheme" class="bg-gray-200 text-sm px-3 py-1 rounded hover:bg-gray-300">
+  🌙 Dark Mode
+</button>
+
+  <nav class="bg-white shadow-md p-4 flex justify-between items-center">
+    <h1 class="text-xl font-bold text-blue-600">E-Learn</h1>
+    <div class="space-x-6 text-gray-700">
+      <a href="index.html" class="hover:text-blue-600">Home</a>
+      <a href="courses.html" class="hover:text-blue-600">Courses</a>
+      <a href="dashboard.html" class="hover:text-blue-600">Dashboard</a>
+    </div>
+  </nav>
+
+  <!-- 📈 Enrolled Courses -->
+  <section class="p-8 max-w-4xl mx-auto">
+    <h2 class="text-2xl font-bold mb-6">Your Enrolled Courses</h2>
+    <div id="enrolledCourses" class="space-y-4">
+
+        
+      <!-- JS will fill this -->
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
